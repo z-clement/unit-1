@@ -110,23 +110,24 @@ $(document).ready(initialize);
 
 // from debug_ajax.js
 function debugCallback(response){
-	
-	$(mydiv).append('GeoJSON data: ' + JSON.stringify(mydata));
+	// appending the GeoJSON feature collection to the 'mydiv' section of the page
+	$(mydiv).append('<br>GeoJSON data:<br>' + JSON.stringify(response.responseJSON));
 };
 
 function debugAjax(){
 	
+	// mydata will store the data retrieved from the MegaCities.geojson file
 	var mydata;
+	// logging statements to debug the code
+	console.log("ajax");
+	console.log(mydata);
 
-	$.ajax("data/MegaCities.geojson", {
+	// use .ajax to asynchronously get the data from the geoJSON file, and once it's gotten call the debugCallback function
+	mydata = $.ajax("data/MegaCities.geojson", {
 		dataType: "json",
 		success: function(response){
 			
 			debugCallback(mydata);
 		}
 	});
-
-	$(mydiv).append('<br>GeoJSON data:<br>' + JSON.stringify(mydata));
 };
-
-//$(mydiv).append('GeoJSON data: ' + JSON.stringify(mydata));
